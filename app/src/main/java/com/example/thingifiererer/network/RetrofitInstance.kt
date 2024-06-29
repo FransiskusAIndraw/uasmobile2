@@ -4,11 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    val api: HackerNewsApi by lazy {
+    val api: FakeStoreApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://hacker-news.firebaseio.com/v0/")
+            .baseUrl("https://fakestoreapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(HackerNewsApi::class.java)
+            .create(FakeStoreApi::class.java)
     }
 }

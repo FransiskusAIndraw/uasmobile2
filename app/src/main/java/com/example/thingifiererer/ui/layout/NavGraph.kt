@@ -15,12 +15,12 @@ fun NavGraph(startDestination: String = "login") {
         composable("register") { RegisterScreen(navController) }
         composable("list") { ListDataScreen(navController) }
         composable(
-            "detail/{storyId}",
-            arguments = listOf(navArgument("storyId") { type = NavType.LongType })
+            "detail/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.LongType })
         ) { backStackEntry ->
-            val storyId = backStackEntry.arguments?.getLong("storyId") ?: return@composable
-            DetailDataScreen(navController, storyId)
+            val productId = backStackEntry.arguments?.getLong("productId") ?: return@composable
+            DetailDataScreen(navController, productId)
         }
-       // composable("profile") { ProfileScreen(navController) }
+      //  composable("profile") { ProfileScreen(navController) }
     }
 }
