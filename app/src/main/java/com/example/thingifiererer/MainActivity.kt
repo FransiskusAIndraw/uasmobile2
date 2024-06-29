@@ -3,8 +3,6 @@ package com.example.thingifiererer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import com.example.thingifiererer.di.appModule
 import com.example.thingifiererer.ui.layout.NavGraph
 import com.example.thingifiererer.ui.theme.ThingifierererTheme
@@ -23,9 +21,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ThingifierererTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    NavGraph()
-                }
+                NavGraph()
             }
         }
     }
