@@ -1,6 +1,5 @@
 package com.example.thingifiererer.viewmodel
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.thingifiererer.model.Product
@@ -17,6 +16,16 @@ class ProductViewModel : ViewModel() {
         viewModelScope.launch {
             val productList = RetrofitInstance.api.getProducts()
             _products.value = productList
+        }
+    }
+
+    fun searchProducts(query: String) {
+        viewModelScope.launch {
+            val productList = RetrofitInstance.api.getProducts()
+            _products.value = productList.filter {
+                it.title.contains(query, ignoreCase = true) ||
+                        it.category.contains(query, ignoreCase = true)
+            }
         }
     }
 

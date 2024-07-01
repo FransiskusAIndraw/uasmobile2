@@ -10,9 +10,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem.List,
-        BottomNavItem.Profile,
-        BottomNavItem.Login,
-        BottomNavItem.Register
+        BottomNavItem.Search,
+        BottomNavItem.Profile
     )
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -24,9 +23,6 @@ fun BottomNavigationBar(navController: NavHostController) {
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        // on the back stack as users select items
                         navController.popBackStack(navController.graph.startDestinationId, false)
                         launchSingleTop = true
                     }

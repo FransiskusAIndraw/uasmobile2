@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,12 +26,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun LoginScreen(navController: NavHostController) {
     val authViewModel: AuthViewModel = koinViewModel()
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var loginSuccessful by remember { mutableStateOf(false) }
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var loginSuccessful by rememberSaveable { mutableStateOf(false) }
 
-    if (loginSuccessful) {
-        LaunchedEffect(Unit) {
+    LaunchedEffect(loginSuccessful) {
+        if (loginSuccessful) {
             navController.navigate("list") {
                 popUpTo("login") { inclusive = true }
             }

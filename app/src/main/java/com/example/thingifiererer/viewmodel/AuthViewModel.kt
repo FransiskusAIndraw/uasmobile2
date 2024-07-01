@@ -12,18 +12,28 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
     private val _isLoggedIn = MutableStateFlow(false)
     val isLoggedIn: StateFlow<Boolean> = _isLoggedIn
 
+    private val _user = MutableStateFlow<User?>(null)
+    val user: StateFlow<User?> = _user
+
     fun login(username: String, password: String) {
         viewModelScope.launch {
             val user = userRepository.getUser(username, password)
             _isLoggedIn.value = user != null
+            _user.value = user
         }
     }
 
-    fun register(username: String, password: String) {
+    fun register(username: String, password: String, fullName: String, email: String, phoneNumber: String) {
         viewModelScope.launch {
-            val user = User(username = username, password = password)
+            val user = User(username = username, password = password, fullName = fullName, email = email, phoneNumber = phoneNumber)
             userRepository.insertUser(user)
             _isLoggedIn.value = true
+            _user.value = user
         }
+    }
+
+    fun logout() {
+        _isLoggedIn.value = false
+        _user.value = null
     }
 }
